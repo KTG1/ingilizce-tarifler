@@ -25,7 +25,7 @@ nav { display: flex; gap: 1.25rem; }
 nav a { font-size: .9rem; font-weight: 600; text-decoration-thickness: 1px; text-underline-offset: .35rem; }
 .hero { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; max-width: 960px; margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) clamp(1rem, 4vw, 3rem) 4rem; text-align: center; }
 .eyebrow { color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: .76rem; }
-h1, h2, h3 { font-family: "Fraunces", serif; line-height: 1.08; }
+h1, h2, h3, h4 { font-family: "Fraunces", serif; line-height: 1.08; }
 h1 { font-size: clamp(3rem, 8vw, 6.7rem); letter-spacing: -.045em; margin: .45rem 0 1.2rem; }
 h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin: 0 0 1rem; }
 h3 { font-size: 1.3rem; }
@@ -35,6 +35,8 @@ h3 { font-size: 1.3rem; }
 .hero-card dt { color: #4a3b0d; font-size: .73rem; text-transform: uppercase; letter-spacing: .08em; }
 .hero-card dd { margin: .2rem 0 0; font-weight: 700; }
 .page-grid { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem) 6rem; }
+.reading-progress { position: fixed; inset: 0 0 auto; z-index: 12; height: 4px; background: transparent; }
+.reading-progress span { display: block; width: 100%; height: 100%; background: var(--yellow); transform: scaleX(0); transform-origin: left; transition: transform .08s linear; }
 .pasta-facts { width: min(100%, 780px); padding: 0; }
 .recipe-facts { margin: 0; table-layout: fixed; background: transparent; }
 .recipe-facts caption { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -83,17 +85,30 @@ th { background: var(--ink); color: white; font-size: .75rem; text-transform: up
 .vocab { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-top: 1.5rem; }
 .vocab article { background: var(--mint); padding: 1rem; min-height: 130px; }
 .vocab h3 { margin: 0 0 .5rem; }
+.vocab h4 { margin: 0 0 .5rem; font-size: 1.3rem; }
 .vocab-wide { grid-template-columns: repeat(5, 1fr); }
-.variant-list { display: grid; gap: 2rem; margin-top: 2.5rem; }
-.variant-card { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr); gap: 1.5rem; padding: 1.5rem; background: var(--white); border: 1px solid var(--line); text-align: left; }
-.variant-card:nth-child(even) figure { order: -1; }
-.variant-card h3 { margin: .25rem 0 .75rem; font-size: 1.65rem; }
-.variant-card h3 small { display: block; margin-top: .35rem; font: 600 .83rem/1.4 "DM Sans", sans-serif; color: var(--green); }
-.variant-card table { font-size: .83rem; }
-.variant-card th, .variant-card td { padding: .65rem .7rem; }
-.variant-card figure { margin: 0; min-height: 320px; display: flex; flex-direction: column; }
-.variant-card img { width: 100%; height: 100%; min-height: 280px; object-fit: cover; }
-.variant-card figcaption { padding-top: .6rem; color: var(--muted); font-size: .78rem; text-align: center; }
+.recipe-chapters { scroll-margin-top: 130px; }
+.chapter-intro { padding: 4rem 0 1.5rem; text-align: center; border-top: 1px solid var(--line); }
+.recipe-chapter { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(250px, .85fr); gap: 1.5rem; padding: 3.5rem 0; text-align: left !important; }
+.recipe-chapter:nth-of-type(even) figure { order: -1; }
+.chapter-head { grid-column: 1 / -1; display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; align-items: start; }
+.chapter-head h2 { max-width: 800px; margin-bottom: .8rem; font-size: clamp(1.8rem, 3.4vw, 2.8rem); }
+.chapter-head p { max-width: 760px; margin: 0; color: var(--muted); line-height: 1.7; }
+.recipe-chapter figure { margin: 0; min-height: 330px; display: flex; flex-direction: column; }
+.recipe-chapter img { width: 100%; height: 100%; min-height: 300px; border-radius: 14px; object-fit: cover; }
+.recipe-chapter figcaption { padding-top: .6rem; color: var(--muted); font-size: .78rem; text-align: center; }
+.chapter-panels { display: flex; flex-direction: column; gap: .8rem; }
+.learning-panel { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--white); }
+.learning-panel[open] { border-color: #8eb095; box-shadow: 0 12px 30px rgba(23,37,31,.08); }
+.learning-panel summary { position: relative; display: grid; gap: .45rem; padding: 1.15rem 3.25rem 1.15rem 1.15rem; cursor: pointer; list-style: none; }
+.learning-panel summary::-webkit-details-marker { display: none; }
+.learning-panel summary::after { content: "+"; position: absolute; top: 1.15rem; right: 1.15rem; display: grid; place-items: center; width: 1.65rem; height: 1.65rem; border-radius: 50%; background: var(--mint); color: var(--green); font: 800 1.1rem/1 "DM Sans", sans-serif; }
+.learning-panel[open] summary::after { content: "−"; background: var(--green); color: var(--white); }
+.learning-panel summary h3 { margin: 0 !important; font-size: 1.25rem; }
+.learning-panel summary span { color: var(--green); font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+.panel-body { padding: 0 1.15rem 1.15rem; }
+.panel-body table { margin-top: .4rem; font-size: .8rem; }
+.panel-body th, .panel-body td { padding: .65rem .55rem; }
 .variant-number { font: 700 .78rem/1 "DM Sans", sans-serif; color: var(--green); letter-spacing: .12em; }
 .method-note { line-height: 1.65; color: var(--muted); }
 .source-note { margin-top: 1rem; color: var(--muted); font-size: .85rem; }
@@ -114,8 +129,8 @@ footer { padding: 2rem; text-align: center; border-top: 1px solid var(--line); c
   nav { gap: .7rem; flex-wrap: wrap; justify-content: center; }
   .toc a { display: inline-block; margin-right: .8rem; }
   .page-cards, .vocab { grid-template-columns: 1fr 1fr; }
-  .variant-card { grid-template-columns: 1fr; }
-  .variant-card:nth-child(even) figure { order: initial; }
+  .recipe-chapter { grid-template-columns: 1fr; }
+  .recipe-chapter:nth-of-type(even) figure { order: initial; }
   #plain-pasta .steps { grid-template-columns: 1fr; }
   .toc { top: 92px; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
   .toc::-webkit-scrollbar { display: none; }
