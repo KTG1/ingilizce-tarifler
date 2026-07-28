@@ -35,9 +35,23 @@ h3 { font-size: 1.3rem; }
 .hero-card dt { color: #4a3b0d; font-size: .73rem; text-transform: uppercase; letter-spacing: .08em; }
 .hero-card dd { margin: .2rem 0 0; font-weight: 700; }
 .page-grid { max-width: 960px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 3rem) 6rem; }
-.toc { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 1.2rem; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--line); padding: 1.1rem 0; text-align: center; }
+.pasta-facts { width: min(100%, 780px); padding: 0; }
+.recipe-facts { margin: 0; table-layout: fixed; background: transparent; }
+.recipe-facts caption { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.recipe-facts th { padding: 1.15rem .65rem .25rem; border: 0; background: transparent; color: #5d4b13; text-align: center; }
+.recipe-facts td { position: relative; padding: .25rem .65rem 1.25rem; border: 0; text-align: center; }
+.recipe-facts th + th, .recipe-facts td + td { border-left: 1px solid rgba(74,59,13,.2); }
+.fact-value { position: relative; display: inline-block; padding: .2rem .35rem; border-radius: 6px; font-weight: 800; cursor: help; }
+.fact-value:hover, .fact-value:focus-visible { background: rgba(255,255,255,.5); outline: 2px solid var(--ink); outline-offset: 2px; }
+.fact-value::after { content: attr(data-verbalization); position: absolute; left: 50%; bottom: calc(100% + 12px); z-index: 8; width: max-content; max-width: 230px; padding: .65rem .8rem; border-radius: 8px; background: var(--ink); color: var(--white); font-size: .72rem; font-weight: 600; line-height: 1.4; text-align: center; opacity: 0; pointer-events: none; transform: translate(-50%, 6px); transition: opacity .18s ease, transform .18s ease; }
+.fact-value::before { content: ""; position: absolute; left: 50%; bottom: calc(100% + 6px); z-index: 9; border: 6px solid transparent; border-top-color: var(--ink); opacity: 0; transform: translateX(-50%); transition: opacity .18s ease; }
+.fact-value:hover::after, .fact-value:focus-visible::after, .fact-value:hover::before, .fact-value:focus-visible::before { opacity: 1; transform: translate(-50%, 0); }
+.fact-value:hover::before, .fact-value:focus-visible::before { transform: translateX(-50%); }
+.toc { position: sticky; top: 92px; z-index: 4; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .5rem 1.2rem; margin-inline: calc(clamp(1rem, 4vw, 3rem) * -1); padding: 1rem clamp(1rem, 4vw, 3rem); border-top: 3px solid var(--ink); border-bottom: 1px solid var(--line); background: rgba(247,248,242,.96); box-shadow: 0 8px 20px rgba(23,37,31,.06); backdrop-filter: blur(12px); text-align: center; }
 .toc strong { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
+.toc-title { padding: .35rem .7rem; border-radius: 999px; background: var(--ink); color: var(--white); font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
 .toc a { font-size: .88rem; color: var(--muted); }
+.toc a:hover, .toc a:focus-visible { color: var(--green); text-decoration-thickness: 2px; }
 .content section { scroll-margin-top: 130px; padding: 4rem 0; border-top: 1px solid var(--line); text-align: center; }
 .content section:first-child { border-top: 0; }
 .bilingual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -103,6 +117,9 @@ footer { padding: 2rem; text-align: center; border-top: 1px solid var(--line); c
   .variant-card { grid-template-columns: 1fr; }
   .variant-card:nth-child(even) figure { order: initial; }
   #plain-pasta .steps { grid-template-columns: 1fr; }
+  .toc { top: 92px; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .toc::-webkit-scrollbar { display: none; }
+  .toc > * { flex: 0 0 auto; }
 }
 @media (max-width: 520px) {
   .site-header { position: static; }
@@ -111,5 +128,9 @@ footer { padding: 2rem; text-align: center; border-top: 1px solid var(--line); c
   .bilingual, .page-cards, .vocab { grid-template-columns: 1fr; }
   #plain-pasta .steps li { min-height: auto; }
   .step-language { grid-template-columns: 1fr; gap: .3rem; }
+  .toc { top: 0; }
+  .recipe-facts th { font-size: .63rem; }
+  .recipe-facts th, .recipe-facts td { padding-inline: .3rem; }
+  .fact-value { font-size: .82rem; }
   table { display: block; overflow-x: auto; }
 }
