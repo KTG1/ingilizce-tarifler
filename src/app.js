@@ -78,7 +78,7 @@ function setStructuredData(data = null) {
 
 function renderHome() {
   setStructuredData();
-  root.innerHTML = `<div class="index"><p class="eyebrow">3 temsilci tarif sayfası</p><h1>Bildiğiniz tariflerle İngilizce öğrenin.</h1><p class="lede">Ana yemek, tatlı ve içecek kategorilerindeki tariflerle İngilizce mutfak kelimelerini ve yönergeleri adım adım öğrenin.</p><div class="page-cards">${Object.entries(recipes).map(([slug, r]) => `<a href="#/${slug}"><span>${r.label}</span><div><h2>${r.title}</h2><p>${r.englishTitle}</p></div><strong>Sayfayı incele →</strong></a>`).join("")}</div></div>`;
+  root.innerHTML = `<div class="index"><p class="eyebrow">3 temsilci tarif sayfası</p><h1>Bildiğiniz tariflerle İngilizce öğrenin.</h1><p class="lede">Ana yemek, tatlı ve içecek kategorilerindeki tariflerle İngilizce mutfak kelimelerini ve yönergeleri adım adım öğrenin.</p><div class="page-cards">${Object.entries(recipes).map(([slug, r]) => `<a href="#/${slug}"><span>${r.label}</span><section><h2>${r.title}</h2><p>${r.englishTitle}</p></section><strong>Sayfayı incele →</strong></a>`).join("")}</div></div>`;
   document.title = "İngilizce Tarifler — İçerik Prototipleri";
 }
 
@@ -222,10 +222,17 @@ function renderPastaPage() {
   if (articleMeta) articleMeta.outerHTML = `<address class="article-meta" rel="author"><span class="author-mark" aria-hidden="true">KO</span><span><strong>Konuşarak Öğren Editör Ekibi</strong><small>Yayınlanma tarihi: <time datetime="2026-07-29">29 Temmuz 2026</time></small></span></address>`;
   const heroImage = root.querySelector(".hero-visual img");
   if (heroImage) { heroImage.loading = "eager"; heroImage.fetchPriority = "high"; }
+  const heroCaption = root.querySelector(".hero-visual figcaption");
+  if (heroCaption) heroCaption.innerHTML = `<strong>Plain Pasta Recipe</strong><span>Domates sosuyla servis edilen makarna tabağı.</span>`;
+  root.querySelectorAll(".recipe-chapter figure").forEach((figure, index) => {
+    const caption = figure.querySelector("figcaption");
+    const variant = pastaVariants[index];
+    if (caption && variant) caption.innerHTML = `<strong>${variant.english}</strong><span>${variant.title}</span>`;
+  });
   const grammarSection = root.querySelector("#grammar");
   if (grammarSection) grammarSection.innerHTML = grammarTabs();
   root.querySelector("#concepts h2")?.insertAdjacentHTML("afterend", `<aside class="app-banner"><div class="app-icon" aria-hidden="true">ko</div><div><small>Konuşarak Öğren uygulaması</small><strong>Her gün 10 dakika konuşma pratiğini cebinize alın.</strong></div><div class="app-actions"><a href="https://www.konusarakogren.com/" target="_blank" rel="noreferrer">App Store</a><a href="https://www.konusarakogren.com/" target="_blank" rel="noreferrer">Google Play</a></div></aside>`);
-  root.querySelector(".pasta-guide .content")?.insertAdjacentHTML("beforeend", `<aside class="related-recipes" aria-labelledby="related-title"><div><p class="eyebrow">Sıradaki ders</p><h2 id="related-title">İngilizceyi diğer tariflerle geliştirin</h2><p>Mutfak fiillerini yeni bir bağlamda tekrar edin; tatlı veya içecek tariflerinden biriyle devam edin.</p></div><div class="related-grid"><a href="#/baklava"><span>Tatlı · B1</span><strong>İngilizce Baklava Tarifi</strong><small>Layer, brush, spread, pour</small><b>Tarife git →</b></a><a href="#/smoothie"><span>İçecek · A2</span><strong>İngilizce Smoothie Tarifi</strong><small>Peel, slice, blend, pour</small><b>Tarife git →</b></a></div></aside>`);
+  root.querySelector(".pasta-guide .content")?.insertAdjacentHTML("beforeend", `<section class="related-recipes" aria-labelledby="related-title"><div><p class="eyebrow">Sıradaki ders</p><h2 id="related-title">İngilizceyi diğer tariflerle geliştirin</h2><p>Mutfak fiillerini yeni bir bağlamda tekrar edin; tatlı veya içecek tariflerinden biriyle devam edin.</p></div><div class="related-grid"><a href="#/baklava"><span>Tatlı · B1</span><strong>İngilizce Baklava Tarifi</strong><small>Layer, brush, spread, pour</small><b>Tarife git →</b></a><a href="#/smoothie"><span>İçecek · A2</span><strong>İngilizce Smoothie Tarifi</strong><small>Peel, slice, blend, pour</small><b>Tarife git →</b></a></div></section>`);
 }
 
 function route() {

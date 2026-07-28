@@ -68,7 +68,9 @@ h3 { font-size: 1.3rem; }
 .pasta-guide .author-mark { width: 2.35rem; height: 2.35rem; }
 .pasta-guide .hero-visual { margin-top: .35rem; }
 .pasta-guide .hero-visual img { height: clamp(250px, 32vw, 390px); }
-.pasta-guide .hero-visual figcaption { right: .75rem; bottom: .75rem; }
+.pasta-guide .hero-visual figcaption { position: static; display: grid; gap: .2rem; padding: .8rem 1rem 0; background: transparent; color: var(--muted); text-align: center; text-transform: none; letter-spacing: 0; }
+.pasta-guide .hero-visual figcaption strong { color: var(--ink); font: 700 1rem/1.2 "Fraunces", serif; }
+.pasta-guide .hero-visual figcaption span { font-size: .75rem; }
 .pasta-facts { width: min(100%, 780px); padding: 0; }
 .recipe-facts { margin: 0; table-layout: fixed; background: transparent; }
 .recipe-facts caption { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
@@ -136,7 +138,9 @@ th { background: var(--ink); color: white; font-size: .75rem; text-transform: up
 .chapter-head p { max-width: 760px; margin: 0; color: var(--muted); line-height: 1.7; }
 .recipe-chapter figure { margin: 0; min-height: 330px; display: flex; flex-direction: column; }
 .recipe-chapter img { width: 100%; height: 100%; min-height: 300px; border-radius: 14px; object-fit: cover; }
-.recipe-chapter figcaption { padding-top: .6rem; color: var(--muted); font-size: .78rem; text-align: center; }
+.recipe-chapter figcaption { display: grid; gap: .2rem; padding-top: .7rem; color: var(--muted); font-size: .75rem; text-align: center; }
+.recipe-chapter figcaption strong { color: var(--ink); font-size: .82rem; }
+.recipe-chapter figcaption span { color: var(--muted); }
 .chapter-panels { display: flex; flex-direction: column; gap: .8rem; }
 .learning-panel { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--white); }
 .learning-panel[open] { border-color: #8eb095; box-shadow: 0 12px 30px rgba(23,37,31,.08); }
