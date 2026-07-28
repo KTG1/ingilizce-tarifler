@@ -16,3 +16,9 @@ npm run dev
 ```
 
 Üretim derlemesi için `npm run build` komutunu kullanın.
+
+## Tasarım ilkesi
+
+Site genelinde merkez hizalı tasarım tercih edilir. Navigasyon, hero alanları,
+bölüm başlıkları, özet kartları ve sayfa kartları ortalanır; uzun metinler,
+tablolar ve tarif adımları okunabilirlik için kendi içlerinde sola hizalanabilir.

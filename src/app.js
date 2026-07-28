@@ -9,12 +9,12 @@ const sharedVocab = [
 
 const recipes = {
   makarna: {
-    label: "Ana yemek · Main course",
+    label: "Ana yemek",
     title: "İngilizce Makarna Tarifi",
     englishTitle: "Plain Pasta Recipe",
     introEn: "A plain pasta recipe is a simple set of instructions for boiling, draining and serving pasta.",
     introTr: "Sade makarna tarifi; makarnayı kaynatma, süzme ve servis etme adımlarını anlatan basit bir yönergedir.",
-    time: "15 minutes", serves: "2 people", level: "A2–B1", calories: "310 kcal",
+    time: "15 dakika", serves: "2 kişilik", level: "A2–B1", calories: "310 kcal",
     ingredients: [["Pasta", "Makarna", "200 g"], ["Water", "Su", "2 l"], ["Salt", "Tuz", "1 tsp"], ["Butter", "Tereyağı", "1 tbsp"]],
     steps: [
       ["Boil the Water", "First, boil 2 l of water in a large pot.", "Önce büyük bir tencerede 2 l suyu kaynatın."],
@@ -26,12 +26,12 @@ const recipes = {
     vocab: [["boil", "kaynatmak", "Boil 2 l of water."], ["drain", "süzmek", "Drain the cooked pasta."], ["stir", "karıştırmak", "Stir the pasta gently."], ["serve", "servis etmek", "Serve while hot."]],
   },
   baklava: {
-    label: "Tatlı · Dessert",
+    label: "Tatlı",
     title: "İngilizce Baklava Tarifi",
     englishTitle: "Turkish Baklava Recipe",
     introEn: "Baklava is a layered pastry made with thin phyllo sheets, nuts, butter and sweet syrup.",
     introTr: "Baklava; ince yufka katları, kuruyemiş, tereyağı ve şerbetle hazırlanan katmanlı bir tatlıdır.",
-    time: "70 minutes", serves: "12 slices", level: "B1", calories: "330 kcal",
+    time: "70 dakika", serves: "12 dilim", level: "B1", calories: "330 kcal",
     ingredients: [["Phyllo sheets", "Baklavalık yufka", "24 sheets"], ["Pistachios", "Antep fıstığı", "250 g"], ["Melted butter", "Eritilmiş tereyağı", "180 g"], ["Sugar", "Şeker", "300 g"], ["Water", "Su", "300 ml"]],
     steps: [
       ["Prepare the Syrup", "First, boil 300 ml of water with 300 g of sugar for 10 minutes.", "Önce 300 ml suyu 300 g şekerle 10 dakika kaynatın."],
@@ -43,12 +43,12 @@ const recipes = {
     vocab: [["layer", "katman", "Layer the phyllo sheets."], ["brush", "sürmek", "Brush each sheet with butter."], ["spread", "yaymak", "Spread the pistachios evenly."], ["pour", "dökmek", "Pour the syrup slowly."]],
   },
   smoothie: {
-    label: "İçecek · Drink",
+    label: "İçecek",
     title: "İngilizce Smoothie Tarifi",
     englishTitle: "Banana Smoothie Recipe",
     introEn: "A banana smoothie is a cold drink made by blending bananas with milk, yogurt and honey.",
     introTr: "Muzlu smoothie; muzun süt, yoğurt ve balla blenderda karıştırılmasıyla hazırlanan soğuk bir içecektir.",
-    time: "5 minutes", serves: "2 glasses", level: "A2", calories: "210 kcal",
+    time: "5 dakika", serves: "2 bardak", level: "A2", calories: "210 kcal",
     ingredients: [["Bananas", "Muz", "2"], ["Milk", "Süt", "1 cup"], ["Yogurt", "Yoğurt", "½ cup"], ["Honey", "Bal", "1 tbsp"], ["Ice cubes", "Buz küpü", "4"]],
     steps: [
       ["Peel and Slice", "First, peel and slice 2 bananas.", "Önce 2 muzu soyun ve dilimleyin."],
@@ -65,22 +65,22 @@ const root = document.querySelector("#content");
 const table = (headers, rows) => `<table><thead><tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
 
 function renderHome() {
-  root.innerHTML = `<div class="index"><p class="eyebrow">Content prototype · 3 representative pages</p><h1>Learn English from the recipes you already know.</h1><p class="lede">Brief yapısını test etmek için ana yemek, tatlı ve içecek kategorilerinden üç temsilci içerik sayfası hazırlandı.</p><div class="page-cards">${Object.entries(recipes).map(([slug, r]) => `<a href="#/${slug}"><span>${r.label}</span><div><h2>${r.title}</h2><p>${r.englishTitle}</p></div><strong>Sayfayı incele →</strong></a>`).join("")}</div></div>`;
+  root.innerHTML = `<div class="index"><p class="eyebrow">3 temsilci tarif sayfası</p><h1>Bildiğiniz tariflerle İngilizce öğrenin.</h1><p class="lede">Ana yemek, tatlı ve içecek kategorilerindeki tariflerle İngilizce mutfak kelimelerini ve yönergeleri adım adım öğrenin.</p><div class="page-cards">${Object.entries(recipes).map(([slug, r]) => `<a href="#/${slug}"><span>${r.label}</span><div><h2>${r.title}</h2><p>${r.englishTitle}</p></div><strong>Sayfayı incele →</strong></a>`).join("")}</div></div>`;
   document.title = "İngilizce Tarifler — İçerik Prototipleri";
 }
 
 function renderRecipe(r) {
   document.title = `${r.title} | Konuşarak Öğren`;
   root.innerHTML = `<article>
-    <header class="hero"><div><p class="eyebrow">${r.label}</p><h1>${r.title}</h1><p class="lede"><strong>${r.englishTitle}.</strong> ${r.introTr}</p></div><aside class="hero-card" aria-label="Tarif özeti"><dl><div><dt>Time · Süre</dt><dd>${r.time}</dd></div><div><dt>Serves · Porsiyon</dt><dd>${r.serves}</dd></div><div><dt>English level</dt><dd>${r.level}</dd></div><div><dt>Calories</dt><dd>${r.calories}</dd></div></dl></aside></header>
+    <header class="hero"><div><p class="eyebrow">${r.label}</p><h1>${r.title}</h1><p class="lede"><strong>${r.englishTitle}.</strong> ${r.introTr}</p></div><aside class="hero-card" aria-label="Tarif özeti"><dl><div><dt>Süre</dt><dd>${r.time}</dd></div><div><dt>Porsiyon</dt><dd>${r.serves}</dd></div><div><dt>İngilizce seviyesi</dt><dd>${r.level}</dd></div><div><dt>Kalori</dt><dd>${r.calories}</dd></div></dl></aside></header>
     <div class="page-grid"><aside class="toc"><strong>Bu sayfada</strong><a href="#definition">Tanım</a><a href="#ingredients">Malzemeler</a><a href="#steps">Adımlar</a><a href="#equipment">Ekipman</a><a href="#language">Dil bilgisi</a><a href="#exercise">Alıştırma</a></aside>
     <div class="content">
-      <section id="definition"><p class="eyebrow">Definition · Tanım</p><h2>${r.englishTitle} nedir?</h2><div class="bilingual"><div class="language-card"><small>English</small><p>${r.introEn}</p></div><div class="language-card"><small>Türkçe</small><p>${r.introTr}</p></div></div></section>
-      <section id="ingredients"><p class="eyebrow">Ingredients · Malzemeler</p><h2>What ingredients do you need?</h2><p>Malzemeler İngilizce ve Türkçe karşılıklarıyla, ölçüleri rakamla gösterilmiştir.</p>${table(["English ingredient", "Türkçe karşılığı", "Quantity"], r.ingredients)}</section>
-      <section id="steps"><p class="eyebrow">Method · Yapılış</p><h2>How do you make it step by step?</h2><p>Talimatlar İngilizce emir kipiyle başlar; <em>first, then, after that</em> ve <em>finally</em> adımları sıralar.</p><ol class="steps">${r.steps.map(s => `<li><div><h3>${s[0]}</h3><p><strong>${s[1]}</strong></p><p class="translation">${s[2]}</p></div></li>`).join("")}</ol>${table(["Step", "English instruction", "Türkçe açıklama"], r.steps.map((s,i) => [i+1,s[1],s[2]]))}</section>
-      <section id="equipment"><p class="eyebrow">Tools · Araçlar</p><h2>Which kitchen equipment is used?</h2>${table(["English equipment", "Türkçe karşılığı", "Used in step"], r.equipment)}</section>
-      <section id="language"><p class="eyebrow">Kitchen English</p><h2>Temel İngilizce mutfak kelimeleri</h2><div class="vocab">${(r.vocab || sharedVocab).map(v => `<article><h3>${v[0]}</h3><strong>${v[1]}</strong><p>${v[2]}</p></article>`).join("")}</div><h3>Imperative mood · Emir kipi</h3><p>İngilizce tarif talimatları özne almadan fiilin yalın hâliyle başlar: <strong>${r.steps[0][1]}</strong> Olumsuz talimatlarda <em>do not</em> kullanılır: <strong>Do not overcook it.</strong></p></section>
-      <section id="exercise"><div class="exercise"><p class="eyebrow">8th grade English</p><h2>4 soruluk mini alıştırma</h2><ol><li>What is the main ingredient in this recipe?</li><li>Which verb begins the first instruction?</li><li>How long does the recipe take?</li><li>Write the final step in Turkish.</li></ol></div></section>
+      <section id="definition"><p class="eyebrow">Tanım</p><h2>${r.englishTitle} nedir?</h2><div class="bilingual"><div class="language-card"><small>İngilizce</small><p>${r.introEn}</p></div><div class="language-card"><small>Türkçe</small><p>${r.introTr}</p></div></div></section>
+      <section id="ingredients"><p class="eyebrow">Malzemeler</p><h2>Hangi malzemeler gerekir?</h2><p>Malzemeler İngilizce ve Türkçe karşılıklarıyla, ölçüleri rakamla gösterilmiştir.</p>${table(["İngilizce malzeme", "Türkçe karşılığı", "Miktar"], r.ingredients)}</section>
+      <section id="steps"><p class="eyebrow">Yapılış</p><h2>Adım adım nasıl yapılır?</h2><p>Talimatlar İngilizce emir kipiyle başlar; <em>first, then, after that</em> ve <em>finally</em> adımları sıralar.</p><ol class="steps">${r.steps.map(s => `<li><div><h3>${s[0]}</h3><p><strong>${s[1]}</strong></p><p class="translation">${s[2]}</p></div></li>`).join("")}</ol>${table(["Adım", "İngilizce talimat", "Türkçe açıklama"], r.steps.map((s,i) => [i+1,s[1],s[2]]))}</section>
+      <section id="equipment"><p class="eyebrow">Mutfak araçları</p><h2>Hangi mutfak araçları kullanılır?</h2>${table(["İngilizce araç adı", "Türkçe karşılığı", "Kullanıldığı adım"], r.equipment)}</section>
+      <section id="language"><p class="eyebrow">Mutfakta İngilizce</p><h2>Temel İngilizce mutfak kelimeleri</h2><div class="vocab">${(r.vocab || sharedVocab).map(v => `<article><h3>${v[0]}</h3><strong>${v[1]}</strong><p>${v[2]}</p></article>`).join("")}</div><h3>Emir kipi</h3><p>İngilizce tarif talimatları özne almadan fiilin yalın hâliyle başlar: <strong>${r.steps[0][1]}</strong> Olumsuz talimatlarda <em>do not</em> kullanılır: <strong>Do not overcook it.</strong></p></section>
+      <section id="exercise"><div class="exercise"><p class="eyebrow">8. sınıf İngilizce</p><h2>4 soruluk mini alıştırma</h2><ol><li>Tarifin ana malzemesi nedir?</li><li>İlk talimat hangi İngilizce fiille başlıyor?</li><li>Tarifin hazırlanması ne kadar sürüyor?</li><li>Son adımı Türkçe olarak yazın.</li></ol></div></section>
     </div></div></article>`;
 }
 
