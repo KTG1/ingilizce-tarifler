@@ -173,6 +173,10 @@ const pastaVariants = [
   },
 ];
 
+function grammarTabs() {
+  return `<p class="eyebrow">İngilizce dil kuralları</p><h2>İngilizce Makarna Tarifi Yazarken Dikkat Edilmesi Gereken Dil Kuralları</h2><p class="section-intro">Üç kısa derste kuralı inceleyin, örneği okuyun ve Türkçe karşılığıyla pekiştirin.</p><div class="grammar-tabs"><div class="tab-list" role="tablist" aria-label="Dil kuralı konuları"><button id="tab-overview" role="tab" aria-selected="true" aria-controls="panel-overview" tabindex="0" data-tab="overview"><span>01</span>Genel kurallar</button><button id="tab-imperative" role="tab" aria-selected="false" aria-controls="panel-imperative" tabindex="-1" data-tab="imperative"><span>02</span>Emir kipi</button><button id="tab-sequence" role="tab" aria-selected="false" aria-controls="panel-sequence" tabindex="-1" data-tab="sequence"><span>03</span>Sıra zarfları</button></div><div class="tab-panels"><div id="panel-overview" class="tab-panel" role="tabpanel" aria-labelledby="tab-overview" data-panel="overview">${table(["Kural","İngilizce örnek","Türkçe karşılığı"],[["Emir kipi","Boil the water.","Suyu kaynatın."],["Sıra zarfları","First, boil the water.","Önce suyu kaynatın."],["Sayılabilen/sayılamayan isimler","Add two tomatoes and some salt.","İki domates ve biraz tuz ekleyin."],["Ölçü ifadeleri","Add 1 tablespoon of oil.","1 yemek kaşığı yağ ekleyin."]])}</div><div id="panel-imperative" class="tab-panel" role="tabpanel" aria-labelledby="tab-imperative" data-panel="imperative" hidden><h3>İngilizce Makarna Tarif Metinlerinde Emir Kipi (Imperative) Nasıl Kullanılır?</h3><p class="section-intro">Emir kipi, özne kullanmadan fiilin yalın hâliyle başlar: <strong>Boil, add, cook, drain, serve.</strong> Olumsuz talimatta <em>do not</em> kullanılır.</p>${table(["İngilizce emir","Türkçe karşılığı","Fiil"],[["Boil the water.","Suyu kaynatın.","boil"],["Add the pasta.","Makarnayı ekleyin.","add"],["Cook for 10 minutes.","10 dakika pişirin.","cook"],["Drain the pasta.","Makarnayı süzün.","drain"],["Serve while hot.","Sıcakken servis edin.","serve"]])}</div><div id="panel-sequence" class="tab-panel" role="tabpanel" aria-labelledby="tab-sequence" data-panel="sequence" hidden><h3>Bağlaçlar ve Sıra Zarfları: First, Then, After That, Finally</h3>${table(["Sıra zarfı","Türkçe karşılığı","Örnek"],[["First","Önce","First, boil the water."],["Then","Ardından","Then, add the pasta."],["After that","Daha sonra","After that, cook for 10 minutes."],["Next","Sonra","Next, drain the pasta."],["Finally","Son olarak","Finally, serve while hot."]])}<div class="language-card sequence"><small>Kısa tarif paragrafı</small><p>First, boil the water. Then, add the salt and pasta. After that, cook for 8–10 minutes. Next, drain the pasta and add butter. Finally, serve it while hot.</p><p class="translation">Önce suyu kaynatın. Ardından tuz ve makarnayı ekleyin. Daha sonra 8–10 dakika pişirin. Sonra makarnayı süzüp tereyağı ekleyin. Son olarak sıcakken servis edin.</p></div></div></div></div>`;
+}
+
 function renderPastaPage() {
   const r = recipes.makarna;
   const vocab = [
@@ -210,6 +214,8 @@ function renderPastaPage() {
       <section id="grammar"><p class="eyebrow">İngilizce dil kuralları</p><h2>İngilizce Makarna Tarifi Yazarken Dikkat Edilmesi Gereken Dil Kuralları</h2>${table(["Kural","İngilizce örnek","Türkçe karşılığı"],[["Emir kipi","Boil the water.","Suyu kaynatın."],["Sıra zarfları","First, boil the water.","Önce suyu kaynatın."],["Sayılabilen/sayılamayan isimler","Add two tomatoes and some salt.","İki domates ve biraz tuz ekleyin."],["Ölçü ifadeleri","Add 1 tablespoon of oil.","1 yemek kaşığı yağ ekleyin."]])}<h3>İngilizce Makarna Tarif Metinlerinde Emir Kipi (Imperative) Nasıl Kullanılır?</h3><p class="section-intro">Emir kipi, özne kullanmadan fiilin yalın hâliyle başlar: <strong>Boil, add, cook, drain, serve.</strong> Olumsuz talimatta <em>do not</em> kullanılır: <strong>Do not overcook the pasta. / Makarnayı fazla pişirmeyin.</strong></p>${table(["İngilizce emir","Türkçe karşılığı","Fiil"],[["Boil the water.","Suyu kaynatın.","boil"],["Add the pasta.","Makarnayı ekleyin.","add"],["Cook for 10 minutes.","10 dakika pişirin.","cook"],["Drain the pasta.","Makarnayı süzün.","drain"],["Serve while hot.","Sıcakken servis edin.","serve"]])}<h3>Bağlaçlar ve Sıra Zarfları: First, Then, After That, Finally</h3>${table(["Sıra zarfı","Türkçe karşılığı","Örnek"],[["First","Önce","First, boil the water."],["Then","Ardından","Then, add the pasta."],["After that","Daha sonra","After that, cook for 10 minutes."],["Next","Sonra","Next, drain the pasta."],["Finally","Son olarak","Finally, serve while hot."]])}<div class="language-card sequence"><small>Kısa tarif paragrafı</small><p>First, boil the water. Then, add the salt and pasta. After that, cook for 8–10 minutes. Next, drain the pasta and add butter. Finally, serve it while hot.</p><p class="translation">Önce suyu kaynatın. Ardından tuz ve makarnayı ekleyin. Daha sonra 8–10 dakika pişirin. Sonra makarnayı süzüp tereyağı ekleyin. Son olarak sıcakken servis edin.</p></div></section>
       <section id="exercise"><div class="exercise"><p class="eyebrow">Kazanım kontrolü</p><h2>8. sınıf İngilizce Makarna Tarifi</h2><p>Tarif sıralama, emir kipi ve temel mutfak kelimelerini birlikte pekiştirin.</p><ol><li>“Drain the pasta” cümlesinin Türkçe karşılığı nedir?</li><li>Makarnayı kaç dakika pişirmelisiniz?</li><li>Tarifin son adımını İngilizce yazın.</li><li><em>First</em> ve <em>finally</em> kelimelerini kullanarak iki tarif cümlesi kurun.</li></ol></div></section>
     </div></div></article>`;
+  const grammarSection = root.querySelector("#grammar");
+  if (grammarSection) grammarSection.innerHTML = grammarTabs();
   root.querySelector("#concepts h2")?.insertAdjacentHTML("afterend", `<aside class="app-banner"><div class="app-icon" aria-hidden="true">ko</div><div><small>Konuşarak Öğren uygulaması</small><strong>Her gün 10 dakika konuşma pratiğini cebinize alın.</strong></div><div class="app-actions"><a href="https://www.konusarakogren.com/" target="_blank" rel="noreferrer">App Store</a><a href="https://www.konusarakogren.com/" target="_blank" rel="noreferrer">Google Play</a></div></aside>`);
   root.querySelector(".pasta-guide .content")?.insertAdjacentHTML("beforeend", `<aside class="related-recipes" aria-labelledby="related-title"><div><p class="eyebrow">Sıradaki ders</p><h2 id="related-title">İngilizceyi diğer tariflerle geliştirin</h2><p>Mutfak fiillerini yeni bir bağlamda tekrar edin; tatlı veya içecek tariflerinden biriyle devam edin.</p></div><div class="related-grid"><a href="#/baklava"><span>Tatlı · B1</span><strong>İngilizce Baklava Tarifi</strong><small>Layer, brush, spread, pour</small><b>Tarife git →</b></a><a href="#/smoothie"><span>İçecek · A2</span><strong>İngilizce Smoothie Tarifi</strong><small>Peel, slice, blend, pour</small><b>Tarife git →</b></a></div></aside>`);
 }
@@ -232,13 +238,40 @@ function route() {
   }
 }
 window.addEventListener("hashchange", route);
+function activateGrammarTab(tab) {
+  const tabs = [...tab.closest("[role='tablist']").querySelectorAll("[role='tab']")];
+  const container = tab.closest(".grammar-tabs");
+  tabs.forEach(item => {
+    const active = item === tab;
+    item.setAttribute("aria-selected", String(active));
+    item.tabIndex = active ? 0 : -1;
+  });
+  container.querySelectorAll("[role='tabpanel']").forEach(panel => {
+    panel.hidden = panel.dataset.panel !== tab.dataset.tab;
+  });
+  tab.focus();
+}
 document.addEventListener("click", event => {
+  const tab = event.target.closest("[role='tab'][data-tab]");
+  if (tab) {
+    activateGrammarTab(tab);
+    return;
+  }
   const link = event.target.closest("[data-scroll-target]");
   if (!link) return;
   const section = document.getElementById(link.dataset.scrollTarget);
   if (!section) return;
   event.preventDefault();
   section.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+document.addEventListener("keydown", event => {
+  const tab = event.target.closest("[role='tab'][data-tab]");
+  if (!tab || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+  event.preventDefault();
+  const tabs = [...tab.closest("[role='tablist']").querySelectorAll("[role='tab']")];
+  const current = tabs.indexOf(tab);
+  const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : event.key === "ArrowRight" ? (current + 1) % tabs.length : (current - 1 + tabs.length) % tabs.length;
+  activateGrammarTab(tabs[next]);
 });
 window.addEventListener("scroll", () => {
   const progress = document.querySelector(".reading-progress span");

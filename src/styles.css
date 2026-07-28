@@ -136,6 +136,20 @@ th { background: var(--ink); color: white; font-size: .75rem; text-transform: up
 .method-note { line-height: 1.65; color: var(--muted); }
 .source-note { margin-top: 1rem; color: var(--muted); font-size: .85rem; }
 .sequence { max-width: 760px; margin: 2rem auto 0; line-height: 1.7; }
+.grammar-tabs { margin-top: 2rem; border: 1px solid var(--line); background: var(--white); text-align: left; }
+.tab-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-bottom: 1px solid var(--line); background: #edf2eb; }
+.tab-list button { position: relative; display: flex; align-items: center; justify-content: center; gap: .55rem; min-height: 72px; padding: 1rem; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--muted); font: 700 .86rem/1.2 "DM Sans", sans-serif; cursor: pointer; }
+.tab-list button:last-child { border-right: 0; }
+.tab-list button span { color: #7f9484; font-size: .65rem; letter-spacing: .08em; }
+.tab-list button::after { content: ""; position: absolute; right: 1rem; bottom: -1px; left: 1rem; height: 4px; background: var(--green); transform: scaleX(0); transition: transform .2s ease; }
+.tab-list button[aria-selected="true"] { background: var(--white); color: var(--ink); }
+.tab-list button[aria-selected="true"] span { color: var(--green); }
+.tab-list button[aria-selected="true"]::after { transform: scaleX(1); }
+.tab-panel { min-height: 390px; padding: clamp(1rem, 3vw, 2rem); animation: tab-in .22s ease both; }
+.tab-panel[hidden] { display: none; }
+.tab-panel h3 { max-width: 760px; margin: .25rem auto 1rem !important; text-align: center; }
+.tab-panel table { margin-top: 0; }
+@keyframes tab-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .pasta-guide .content h3 { margin-top: 2.5rem; }
 .exercise { background: var(--ink); color: white; padding: clamp(1.5rem, 4vw, 3rem); }
 .exercise ol { display: inline-block; line-height: 2; text-align: left; }
@@ -185,4 +199,8 @@ footer { padding: 2rem; text-align: center; border-top: 1px solid var(--line); c
   .course-banner { flex-direction: column; text-align: center; }
   .course-banner a { width: 100%; text-align: center; }
   .related-grid { grid-template-columns: 1fr; }
+  .tab-list { display: flex; overflow-x: auto; scrollbar-width: none; }
+  .tab-list::-webkit-scrollbar { display: none; }
+  .tab-list button { flex: 0 0 150px; }
+  .tab-panel { min-height: 0; padding: 1rem; }
 }
