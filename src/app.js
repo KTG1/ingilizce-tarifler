@@ -66,12 +66,24 @@ const recipes = {
 const root = document.querySelector("#content");
 const table = (headers, rows) => `<table><thead><tr>${headers.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${cell}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
 
+function setStructuredData(data = null) {
+  document.querySelector("#recipe-structured-data")?.remove();
+  if (!data) return;
+  const script = document.createElement("script");
+  script.id = "recipe-structured-data";
+  script.type = "application/ld+json";
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
 function renderHome() {
+  setStructuredData();
   root.innerHTML = `<div class="index"><p class="eyebrow">3 temsilci tarif sayfası</p><h1>Bildiğiniz tariflerle İngilizce öğrenin.</h1><p class="lede">Ana yemek, tatlı ve içecek kategorilerindeki tariflerle İngilizce mutfak kelimelerini ve yönergeleri adım adım öğrenin.</p><div class="page-cards">${Object.entries(recipes).map(([slug, r]) => `<a href="#/${slug}"><span>${r.label}</span><div><h2>${r.title}</h2><p>${r.englishTitle}</p></div><strong>Sayfayı incele →</strong></a>`).join("")}</div></div>`;
   document.title = "İngilizce Tarifler — İçerik Prototipleri";
 }
 
 function renderRecipe(r) {
+  setStructuredData();
   document.title = `${r.title} | Konuşarak Öğren`;
   root.innerHTML = `<article>
     <header class="hero"><div><p class="eyebrow">${r.label}</p><h1>${r.title}</h1><p class="lede"><strong>${r.englishTitle}.</strong> ${r.introTr}</p></div><aside class="hero-card" aria-label="Tarif özeti"><dl><div><dt>Süre</dt><dd>${r.time}</dd></div><div><dt>Porsiyon</dt><dd>${r.serves}</dd></div><div><dt>İngilizce seviyesi</dt><dd>${r.level}</dd></div><div><dt>Kalori</dt><dd>${r.calories}</dd></div></dl></aside></header>
@@ -171,10 +183,23 @@ function renderPastaPage() {
     ["bake", "fırında pişirmek", "Bake at 190°C."], ["serve", "servis etmek", "Serve while hot."],
   ];
   document.title = "İngilizce Makarna Tarifi (Makarna Yapılışı İngilizce) | Konuşarak Öğren";
+  setStructuredData({
+    "@context": "https://schema.org", "@type": "Recipe",
+    name: "İngilizce Makarna Tarifi (Makarna Yapılışı İngilizce)",
+    image: ["https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?auto=format&fit=crop&w=1600&q=85"],
+    author: { "@type": "Organization", name: "Konuşarak Öğren" },
+    datePublished: "2026-07-29",
+    description: "İngilizce sade makarna tarifi; malzemeler, pişirme adımları ve Türkçe karşılıkları.",
+    prepTime: "PT5M", cookTime: "PT10M", totalTime: "PT15M", recipeYield: "2 porsiyon",
+    recipeCategory: "Ana yemek", recipeCuisine: "İtalyan",
+    nutrition: { "@type": "NutritionInformation", calories: "310 calories" },
+    recipeIngredient: ["200 g pasta", "2 l water", "1 teaspoon salt", "1 tablespoon butter or olive oil"],
+    recipeInstructions: r.steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, name: step[0], text: step[1] }))
+  });
   root.innerHTML = `<article class="pasta-guide">
     <div class="reading-progress" aria-hidden="true"><span></span></div>
-    <header class="hero"><div><p class="eyebrow">İngilizce yemek tarifleri</p><h1>İngilizce Makarna Tarifi (Makarna Yapılışı İngilizce)</h1><p class="lede"><strong>Plain Pasta Recipe.</strong> İngilizce makarna tarifi; malzemeleri, emir kipindeki pişirme adımlarını ve Türkçe karşılıklarını birlikte öğreten uygulamalı bir İngilizce rehberidir.</p></div><aside class="hero-card pasta-facts" aria-label="Tarif özeti"><table class="recipe-facts"><caption>Sade makarna tarifi özeti</caption><thead><tr><th scope="col">Hazırlık</th><th scope="col">Pişirme</th><th scope="col">Porsiyon</th><th scope="col">Seviye</th></tr></thead><tbody><tr><td><span class="fact-value" tabindex="0" aria-label="Hazırlık süresi 5 dakikadır." data-verbalization="Hazırlık süresi 5 dakikadır.">5 dakika</span></td><td><span class="fact-value" tabindex="0" aria-label="Pişirme süresi 10 dakikadır." data-verbalization="Pişirme süresi 10 dakikadır.">10 dakika</span></td><td><span class="fact-value" tabindex="0" aria-label="Tarif 2 kişiliktir." data-verbalization="Tarif 2 kişiliktir.">2 kişilik</span></td><td><span class="fact-value" tabindex="0" aria-label="İngilizce seviyesi A2 ile B1 arasındadır." data-verbalization="İngilizce seviyesi A2 ile B1 arasındadır.">A2–B1</span></td></tr></tbody></table></aside></header>
-    <div class="page-grid"><nav class="toc" aria-label="İçindekiler"><span class="toc-title">İçindekiler</span><a href="#concepts" data-scroll-target="concepts">Kavramlar</a><a href="#recipes" data-scroll-target="recipes">Tarifler</a><a href="#plain-pasta" data-scroll-target="plain-pasta">6 adım</a><a href="#nutrition" data-scroll-target="nutrition">Besin değerleri</a><a href="#measurements" data-scroll-target="measurements">Ölçüler</a><a href="#grammar" data-scroll-target="grammar">Dil kuralları</a><a href="#exercise" data-scroll-target="exercise">Alıştırma</a></nav>
+    <header class="hero"><nav class="breadcrumb" aria-label="Sayfa yolu"><a href="#/">Ana sayfa</a><span>/</span><a href="#/makarna">İngilizce tarifler</a><span>/</span><span aria-current="page">Makarna</span></nav><div><p class="eyebrow">İngilizce yemek tarifleri</p><h1>İngilizce Makarna Tarifi (Makarna Yapılışı İngilizce)</h1><aside class="course-banner" aria-label="İngilizce kursu"><div><small>Konuşarak Öğren İngilizce Kursu</small><strong>İngilizceyi tarif ezberleyerek değil, konuşarak öğrenin.</strong></div><a href="https://www.konusarakogren.com/" target="_blank" rel="noreferrer">Ücretsiz tanışma dersi <span>→</span></a></aside><p class="lede"><strong>Plain Pasta Recipe.</strong> İngilizce makarna tarifi; malzemeleri, emir kipindeki pişirme adımlarını ve Türkçe karşılıklarını birlikte öğreten uygulamalı bir İngilizce rehberidir.</p><div class="article-meta"><span class="author-mark" aria-hidden="true">KO</span><span><strong>Konuşarak Öğren Editör Ekibi</strong><small>Yayınlanma tarihi: <time datetime="2026-07-29">29 Temmuz 2026</time></small></span></div></div><figure class="hero-visual"><img src="https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?auto=format&fit=crop&w=1600&q=85" alt="Masada servis edilmeye hazır sade makarna tabağı"><figcaption>Plain pasta · sade makarna</figcaption></figure><aside class="hero-card pasta-facts" aria-label="Tarif özeti"><table class="recipe-facts"><caption>Sade makarna tarifi özeti</caption><thead><tr><th scope="col">Hazırlık</th><th scope="col">Pişirme</th><th scope="col">Porsiyon</th><th scope="col">Seviye</th></tr></thead><tbody><tr><td><span class="fact-value" tabindex="0" aria-label="Hazırlık süresi 5 dakikadır." data-verbalization="Hazırlık süresi 5 dakikadır.">5 dakika</span></td><td><span class="fact-value" tabindex="0" aria-label="Pişirme süresi 10 dakikadır." data-verbalization="Pişirme süresi 10 dakikadır.">10 dakika</span></td><td><span class="fact-value" tabindex="0" aria-label="Tarif 2 kişiliktir." data-verbalization="Tarif 2 kişiliktir.">2 kişilik</span></td><td><span class="fact-value" tabindex="0" aria-label="İngilizce seviyesi A2 ile B1 arasındadır." data-verbalization="İngilizce seviyesi A2 ile B1 arasındadır.">A2–B1</span></td></tr></tbody></table></aside></header>
+    <div class="page-grid"><nav class="toc" aria-label="İçindekiler"><span class="toc-title">İçindekiler</span><a href="#concepts" data-scroll-target="concepts"><b>#</b>Kavramlar</a><a href="#recipes" data-scroll-target="recipes"><b>#</b>Tarifler</a><a href="#plain-pasta" data-scroll-target="plain-pasta"><b>#</b>6 adım</a><a href="#nutrition" data-scroll-target="nutrition"><b>#</b>Besin değerleri</a><a href="#measurements" data-scroll-target="measurements"><b>#</b>Ölçüler</a><a href="#grammar" data-scroll-target="grammar"><b>#</b>Dil kuralları</a><a href="#exercise" data-scroll-target="exercise"><b>#</b>Alıştırma</a></nav>
     <div class="content">
       <section id="concepts"><p class="eyebrow">Temel kavramlar ve çeviriler</p><h2>İngilizce Makarna Tarifi Nedir? Temel Kavramlar ve Çeviriler</h2><h3>Makarna İngilizcede Ne Anlama Gelir?</h3><p class="section-intro">İngilizcede <strong>pasta</strong> genel kategoriyi, <strong>spaghetti</strong>, <strong>penne</strong> ve <strong>fettuccine</strong> ise belirli makarna biçimlerini anlatır. Tarif boyunca İngilizce talimat önce, Türkçe açıklama hemen sonra verilir.</p>${table(["İngilizce kavram", "Türkçe karşılığı", "İlgili tarif"], [["pasta","makarna","Tüm tarifler"],["plain pasta","sade makarna","Sade makarna"],["spaghetti","spagetti","Bolonez"],["fettuccine","şerit makarna","Alfredo"],["penne","kalem makarna","Domates soslu veya fırında makarna"]])}<h3>İngilizce Tarif Yazımında Kullanılan Fiiller: Boil, Drain, Saute, Cook</h3>${table(["Fiil", "Türkçe karşılığı", "Örnek cümle"], [["Boil","Kaynatmak","Boil 2 l of water. / 2 l su kaynatın."],["Drain","Süzmek","Drain the pasta. / Makarnayı süzün."],["Saute / Sauté","Sotelemek","Sauté the garlic. / Sarımsağı soteleyin."],["Cook","Pişirmek","Cook for 10 minutes. / 10 dakika pişirin."]])}</section>
       <div id="recipes" class="recipe-chapters"><div class="chapter-intro"><p class="eyebrow">6 tarif çeşidi</p><p class="section-intro">Her tarifte tanım, İngilizce–Türkçe malzemeler, miktarlar ve kısa yapılış birlikte verilmiştir. Başlıklara dokunarak öğrenme panellerini açabilirsiniz.</p></div>${pastaVariants.map((v, i) => `<section class="recipe-chapter"><div class="chapter-head"><span class="variant-number">${String(i + 1).padStart(2,"0")}</span><div><h2>${v.briefTitle}</h2><p>${v.description}</p></div></div><figure><img src="${v.image}" alt="${v.alt}" loading="lazy"><figcaption>${v.english}</figcaption></figure><div class="chapter-panels"><details class="learning-panel" ${i === 0 ? "open" : ""}><summary><h3>${v.ingredientsHeading}</h3><span>Malzeme tablosu</span></summary><div class="panel-body">${table(["İngilizce malzeme","Türkçe karşılığı","Miktar"],v.ingredients)}</div></details><details class="learning-panel"><summary><h3>${v.stepsHeading}</h3><span>Yöntemi göster</span></summary><div class="panel-body"><p class="method-note">${v.steps}</p></div></details></div></section>`).join("")}</div>
@@ -185,12 +210,26 @@ function renderPastaPage() {
       <section id="grammar"><p class="eyebrow">İngilizce dil kuralları</p><h2>İngilizce Makarna Tarifi Yazarken Dikkat Edilmesi Gereken Dil Kuralları</h2>${table(["Kural","İngilizce örnek","Türkçe karşılığı"],[["Emir kipi","Boil the water.","Suyu kaynatın."],["Sıra zarfları","First, boil the water.","Önce suyu kaynatın."],["Sayılabilen/sayılamayan isimler","Add two tomatoes and some salt.","İki domates ve biraz tuz ekleyin."],["Ölçü ifadeleri","Add 1 tablespoon of oil.","1 yemek kaşığı yağ ekleyin."]])}<h3>İngilizce Makarna Tarif Metinlerinde Emir Kipi (Imperative) Nasıl Kullanılır?</h3><p class="section-intro">Emir kipi, özne kullanmadan fiilin yalın hâliyle başlar: <strong>Boil, add, cook, drain, serve.</strong> Olumsuz talimatta <em>do not</em> kullanılır: <strong>Do not overcook the pasta. / Makarnayı fazla pişirmeyin.</strong></p>${table(["İngilizce emir","Türkçe karşılığı","Fiil"],[["Boil the water.","Suyu kaynatın.","boil"],["Add the pasta.","Makarnayı ekleyin.","add"],["Cook for 10 minutes.","10 dakika pişirin.","cook"],["Drain the pasta.","Makarnayı süzün.","drain"],["Serve while hot.","Sıcakken servis edin.","serve"]])}<h3>Bağlaçlar ve Sıra Zarfları: First, Then, After That, Finally</h3>${table(["Sıra zarfı","Türkçe karşılığı","Örnek"],[["First","Önce","First, boil the water."],["Then","Ardından","Then, add the pasta."],["After that","Daha sonra","After that, cook for 10 minutes."],["Next","Sonra","Next, drain the pasta."],["Finally","Son olarak","Finally, serve while hot."]])}<div class="language-card sequence"><small>Kısa tarif paragrafı</small><p>First, boil the water. Then, add the salt and pasta. After that, cook for 8–10 minutes. Next, drain the pasta and add butter. Finally, serve it while hot.</p><p class="translation">Önce suyu kaynatın. Ardından tuz ve makarnayı ekleyin. Daha sonra 8–10 dakika pişirin. Sonra makarnayı süzüp tereyağı ekleyin. Son olarak sıcakken servis edin.</p></div></section>
       <section id="exercise"><div class="exercise"><p class="eyebrow">Kazanım kontrolü</p><h2>8. sınıf İngilizce Makarna Tarifi</h2><p>Tarif sıralama, emir kipi ve temel mutfak kelimelerini birlikte pekiştirin.</p><ol><li>“Drain the pasta” cümlesinin Türkçe karşılığı nedir?</li><li>Makarnayı kaç dakika pişirmelisiniz?</li><li>Tarifin son adımını İngilizce yazın.</li><li><em>First</em> ve <em>finally</em> kelimelerini kullanarak iki tarif cümlesi kurun.</li></ol></div></section>
     </div></div></article>`;
+  root.querySelector("#concepts h2")?.insertAdjacentHTML("afterend", `<aside class="app-banner"><div class="app-icon" aria-hidden="true">ko</div><div><small>Konuşarak Öğren uygulaması</small><strong>Her gün 10 dakika konuşma pratiğini cebinize alın.</strong></div><div class="app-actions"><a href="https://www.konusarakogren.com/" target="_blank" rel="noreferrer">App Store</a><a href="https://www.konusarakogren.com/" target="_blank" rel="noreferrer">Google Play</a></div></aside>`);
+  root.querySelector(".pasta-guide .content")?.insertAdjacentHTML("beforeend", `<aside class="related-recipes" aria-labelledby="related-title"><div><p class="eyebrow">Sıradaki ders</p><h2 id="related-title">İngilizceyi diğer tariflerle geliştirin</h2><p>Mutfak fiillerini yeni bir bağlamda tekrar edin; tatlı veya içecek tariflerinden biriyle devam edin.</p></div><div class="related-grid"><a href="#/baklava"><span>Tatlı · B1</span><strong>İngilizce Baklava Tarifi</strong><small>Layer, brush, spread, pour</small><b>Tarife git →</b></a><a href="#/smoothie"><span>İçecek · A2</span><strong>İngilizce Smoothie Tarifi</strong><small>Peel, slice, blend, pour</small><b>Tarife git →</b></a></div></aside>`);
 }
 
 function route() {
   const slug = location.hash.replace(/^#\//, "");
   slug === "makarna" ? renderPastaPage() : slug && recipes[slug] ? renderRecipe(recipes[slug]) : renderHome();
   window.scrollTo(0, 0);
+  const tocLinks = [...document.querySelectorAll(".toc [data-scroll-target]")];
+  if (tocLinks.length) {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      tocLinks.forEach(link => link.classList.toggle("is-active", link.dataset.scrollTarget === entry.target.id));
+    }), { rootMargin: "-35% 0px -55%", threshold: 0 });
+    tocLinks.forEach(link => {
+      const target = document.getElementById(link.dataset.scrollTarget);
+      if (target) observer.observe(target);
+    });
+    tocLinks[0]?.classList.add("is-active");
+  }
 }
 window.addEventListener("hashchange", route);
 document.addEventListener("click", event => {

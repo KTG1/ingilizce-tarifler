@@ -19,11 +19,26 @@ a { color: inherit; }
 .skip-link { position: fixed; left: 1rem; top: -4rem; z-index: 10; padding: .75rem 1rem; background: var(--ink); color: white; }
 .skip-link:focus { top: 1rem; }
 .site-header { min-height: 92px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .8rem; padding: 1rem clamp(1rem, 5vw, 4rem); border-bottom: 1px solid var(--line); background: rgba(247,248,242,.96); position: sticky; top: 0; z-index: 5; text-align: center; }
-.brand { font-family: "Fraunces", serif; font-size: 1.1rem; text-decoration: none; }
-.brand span { display: block; font: 600 .67rem/1 "DM Sans", sans-serif; text-transform: uppercase; letter-spacing: .13em; color: var(--green); }
+.brand { display: flex; align-items: center; gap: .65rem; font-family: "Fraunces", serif; font-size: 1.1rem; text-decoration: none; }
+.brand > b { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--green); color: white; font: 800 .78rem/1 "DM Sans", sans-serif; text-transform: lowercase; }
+.brand-copy { display: block; color: var(--ink); line-height: 1; text-align: left; }
+.brand-copy small { display: block; margin-top: .3rem; font: 600 .6rem/1 "DM Sans", sans-serif; text-transform: uppercase; letter-spacing: .13em; color: var(--green); }
 nav { display: flex; gap: 1.25rem; }
 nav a { font-size: .9rem; font-weight: 600; text-decoration-thickness: 1px; text-underline-offset: .35rem; }
 .hero { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; max-width: 960px; margin: 0 auto; padding: clamp(4rem, 9vw, 8rem) clamp(1rem, 4vw, 3rem) 4rem; text-align: center; }
+.breadcrumb { align-self: stretch; justify-content: center; flex-wrap: wrap; gap: .45rem; color: var(--muted); font-size: .75rem; }
+.breadcrumb a { color: var(--green); }
+.course-banner { display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; max-width: 780px; margin: 1.8rem auto; padding: 1rem 1.1rem; border: 1px solid var(--ink); background: var(--mint); box-shadow: 6px 6px 0 var(--ink); text-align: left; }
+.course-banner div { display: grid; gap: .25rem; }
+.course-banner small, .app-banner small { color: var(--green); font-size: .66rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+.course-banner a { flex: 0 0 auto; padding: .75rem 1rem; background: var(--ink); color: white; font-size: .78rem; font-weight: 800; text-decoration: none; }
+.article-meta { display: inline-flex; align-items: center; gap: .75rem; margin-top: 1rem; text-align: left; }
+.article-meta > span:last-child { display: grid; gap: .2rem; }
+.article-meta small { color: var(--muted); font-size: .75rem; }
+.author-mark { display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--green); color: white; font-size: .72rem; font-weight: 800; }
+.hero-visual { position: relative; width: 100%; margin: 0; }
+.hero-visual img { display: block; width: 100%; height: clamp(300px, 48vw, 520px); border-radius: 18px; object-fit: cover; }
+.hero-visual figcaption { position: absolute; right: 1rem; bottom: 1rem; padding: .5rem .7rem; background: rgba(23,37,31,.88); color: white; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em; }
 .eyebrow { color: var(--green); font-weight: 700; text-transform: uppercase; letter-spacing: .12em; font-size: .76rem; }
 h1, h2, h3, h4 { font-family: "Fraunces", serif; line-height: 1.08; }
 h1 { font-size: clamp(3rem, 8vw, 6.7rem); letter-spacing: -.045em; margin: .45rem 0 1.2rem; }
@@ -53,6 +68,9 @@ h3 { font-size: 1.3rem; }
 .toc strong { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
 .toc-title { padding: .35rem .7rem; border-radius: 999px; background: var(--ink); color: var(--white); font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
 .toc a { font-size: .88rem; color: var(--muted); }
+.toc a b { margin-right: .15rem; color: #9ab29e; font-weight: 700; }
+.toc a.is-active { color: var(--ink); text-decoration-thickness: 2px; }
+.toc a.is-active b { color: var(--green); }
 .toc a:hover, .toc a:focus-visible { color: var(--green); text-decoration-thickness: 2px; }
 .content section { scroll-margin-top: 130px; padding: 4rem 0; border-top: 1px solid var(--line); text-align: center; }
 .content section:first-child { border-top: 0; }
@@ -60,6 +78,11 @@ h3 { font-size: 1.3rem; }
 .language-card { background: var(--white); border: 1px solid var(--line); padding: 1.2rem; }
 .language-card small { color: var(--green); text-transform: uppercase; letter-spacing: .1em; font-weight: 700; }
 .section-intro { max-width: 740px; margin: 0 auto 1.5rem; line-height: 1.75; color: var(--muted); }
+.app-banner { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; margin: 1.6rem 0 2.5rem; padding: 1.1rem; border-radius: 16px; background: var(--ink); color: white; text-align: left; }
+.app-banner > div:nth-child(2) { display: grid; gap: .25rem; }
+.app-icon { display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 14px; background: var(--yellow); color: var(--ink); font-weight: 900; }
+.app-actions { display: flex; gap: .5rem; }
+.app-actions a { padding: .7rem .8rem; border: 1px solid #73827a; border-radius: 8px; font-size: .7rem; font-weight: 800; text-decoration: none; }
 table { width: 100%; border-collapse: collapse; background: var(--white); margin-top: 1.5rem; }
 th, td { padding: .9rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
 th { background: var(--ink); color: white; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; }
@@ -116,6 +139,15 @@ th { background: var(--ink); color: white; font-size: .75rem; text-transform: up
 .pasta-guide .content h3 { margin-top: 2.5rem; }
 .exercise { background: var(--ink); color: white; padding: clamp(1.5rem, 4vw, 3rem); }
 .exercise ol { display: inline-block; line-height: 2; text-align: left; }
+.related-recipes { margin-top: 4rem; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--ink); background: var(--yellow); text-align: center; box-shadow: 10px 10px 0 var(--ink); }
+.related-recipes > div:first-child > p:not(.eyebrow) { max-width: 650px; margin: 0 auto 1.5rem; line-height: 1.65; }
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.related-grid a { display: grid; gap: .55rem; min-height: 190px; padding: 1.25rem; border: 1px solid var(--ink); background: var(--paper); text-align: left; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
+.related-grid a:hover { transform: translateY(-4px); box-shadow: 5px 5px 0 var(--ink); }
+.related-grid span { color: var(--green); font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+.related-grid strong { font: 700 1.5rem/1.15 "Fraunces", serif; }
+.related-grid small { color: var(--muted); }
+.related-grid b { align-self: end; font-size: .78rem; }
 .index { max-width: 1180px; margin: 0 auto; padding: 6rem clamp(1rem, 4vw, 3rem); text-align: center; }
 .index h1 { max-width: 900px; }
 .page-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 3rem; }
@@ -135,10 +167,12 @@ footer { padding: 2rem; text-align: center; border-top: 1px solid var(--line); c
   .toc { top: 92px; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
   .toc::-webkit-scrollbar { display: none; }
   .toc > * { flex: 0 0 auto; }
+  .app-banner { grid-template-columns: auto 1fr; }
+  .app-actions { grid-column: 1 / -1; justify-content: center; }
 }
 @media (max-width: 520px) {
   .site-header { position: static; }
-  .brand span { display: none; }
+  .brand-copy small { display: none; }
   nav { font-size: .75rem; }
   .bilingual, .page-cards, .vocab { grid-template-columns: 1fr; }
   #plain-pasta .steps li { min-height: auto; }
@@ -148,4 +182,7 @@ footer { padding: 2rem; text-align: center; border-top: 1px solid var(--line); c
   .recipe-facts th, .recipe-facts td { padding-inline: .3rem; }
   .fact-value { font-size: .82rem; }
   table { display: block; overflow-x: auto; }
+  .course-banner { flex-direction: column; text-align: center; }
+  .course-banner a { width: 100%; text-align: center; }
+  .related-grid { grid-template-columns: 1fr; }
 }
